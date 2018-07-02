@@ -13,7 +13,7 @@ public class TestGmail {
 	
   @Test(priority = 0)
   public void Test_gmail_login() {
-   Obj.Gmail_Login("Chetandubey93120","rajat@1998");
+   Obj.Gmail_Login("Chetandubey","********");
    }
   
   @Test(priority=1)
