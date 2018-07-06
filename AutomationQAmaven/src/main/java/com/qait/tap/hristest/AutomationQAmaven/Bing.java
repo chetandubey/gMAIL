@@ -1,38 +1,60 @@
 package com.qait.tap.hristest.AutomationQAmaven;
 
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.ui.Select;
 
-public class Bing {
-WebDriver driver;
+public class bING
+{
+	static WebDriver driver;
+	String translatedText;
+	Boolean condi = false;
 	
 	
-	public Bing(WebDriver driver)
-	{
-	this.driver = driver;
-	}
+	public void inputSelection() {
+	     Select iValue = new Select(driver.findElement(By.id("t_sl")));
+	       iValue.selectByVisibleText("French");
+			System.out.println(iValue);
 
-	public void inputSelection() throws InterruptedException
-	{
-		Select ivalue = new Select(driver.findElement(By.cssSelector("#t_sl")));
-        Thread.sleep(3000);
-		ivalue.selectByVisibleText("English");
+		}
+
+		public void outputSelection() {
+			Select oValue = new Select(driver.findElement(By.id("t_tl")));
+			oValue.selectByVisibleText("English");
+			System.out.println(oValue);
+
+		}	
+	
+	public void launchBrowser()  {
+		System.setProperty("webdriver.chrome.driver","D:\\\\chetan\\\\eclipse-workspace\\\\chromedriver.exe");
+		driver = new ChromeDriver();
+		driver.get("https://www.bing.com/translator");
+		driver.manage().window().maximize();
 		
 	}
-	public void outputSelection() throws InterruptedException
-
-	{
-		Select Ovalue = new Select(driver.findElement(By.cssSelector("#t_tl")));
-        Thread.sleep(3000);
-  
-		Ovalue.selectByVisibleText("French");
+	
+	public void closeBrowser() {
+		//driver.quit();
 	}
 
-	public void inputText()
-	{
-		driver.findElement(By.cssSelector("#t_sv")).sendKeys("Hello Github");
+	public void sendtext() {
+driver.findElement(By.id("t_sv")).sendKeys("Bonjour");		
 	}
+
+	public boolean translation() throws InterruptedException {
+Thread.sleep(10000);
+		WebElement translatedtext = driver.findElement(By.id("t_tv"));
+		System.out.println(translatedtext.getAttribute("value").toString());
+		String translateText = translatedtext.getAttribute("value");
+		if(translateText.equals("Good Morning"))
+			condi = true;
+		return condi;
+	}
+	
 	
 	
 }
